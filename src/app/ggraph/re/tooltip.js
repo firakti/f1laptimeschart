@@ -1,0 +1,8 @@
+﻿class ToolTip {
+    constructor() {
+
+    }
+    Show() {
+
+    }
+}

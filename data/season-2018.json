@@ -1,0 +1,194 @@
+{
+    "Season": 2018,
+    "RaceInfoList": [
+        {
+            "Round": 1,
+            "RaceName": "Australian Grand Prix",
+            "Season": 2018,
+            "Country": "Australia",
+            "CircuitName": "Albert Park Grand Prix Circuit",
+            "StartTime": "2018-03-25T05:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 2,
+            "RaceName": "Bahrain Grand Prix",
+            "Season": 2018,
+            "Country": "Bahrain",
+            "CircuitName": "Bahrain International Circuit",
+            "StartTime": "2018-04-08T15:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 3,
+            "RaceName": "Chinese Grand Prix",
+            "Season": 2018,
+            "Country": "China",
+            "CircuitName": "Shanghai International Circuit",
+            "StartTime": "2018-04-15T06:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 4,
+            "RaceName": "Azerbaijan Grand Prix",
+            "Season": 2018,
+            "Country": "Azerbaijan",
+            "CircuitName": "Baku City Circuit",
+            "StartTime": "2018-04-29T12:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 5,
+            "RaceName": "Spanish Grand Prix",
+            "Season": 2018,
+            "Country": "Spain",
+            "CircuitName": "Circuit de Barcelona-Catalunya",
+            "StartTime": "2018-05-13T13:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 6,
+            "RaceName": "Monaco Grand Prix",
+            "Season": 2018,
+            "Country": "Monaco",
+            "CircuitName": "Circuit de Monaco",
+            "StartTime": "2018-05-27T13:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 7,
+            "RaceName": "Canadian Grand Prix",
+            "Season": 2018,
+            "Country": "Canada",
+            "CircuitName": "Circuit Gilles Villeneuve",
+            "StartTime": "2018-06-10T18:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 8,
+            "RaceName": "French Grand Prix",
+            "Season": 2018,
+            "Country": "France",
+            "CircuitName": "Circuit Paul Ricard",
+            "StartTime": "2018-06-24T14:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 9,
+            "RaceName": "Austrian Grand Prix",
+            "Season": 2018,
+            "Country": "Austria",
+            "CircuitName": "Red Bull Ring",
+            "StartTime": "2018-07-01T13:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 10,
+            "RaceName": "British Grand Prix",
+            "Season": 2018,
+            "Country": "UK",
+            "CircuitName": "Silverstone Circuit",
+            "StartTime": "2018-07-08T13:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 11,
+            "RaceName": "German Grand Prix",
+            "Season": 2018,
+            "Country": "Germany",
+            "CircuitName": "Hockenheimring",
+            "StartTime": "2018-07-22T13:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 12,
+            "RaceName": "Hungarian Grand Prix",
+            "Season": 2018,
+            "Country": "Hungary",
+            "CircuitName": "Hungaroring",
+            "StartTime": "2018-07-29T13:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 13,
+            "RaceName": "Belgian Grand Prix",
+            "Season": 2018,
+            "Country": "Belgium",
+            "CircuitName": "Circuit de Spa-Francorchamps",
+            "StartTime": "2018-08-26T13:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 14,
+            "RaceName": "Italian Grand Prix",
+            "Season": 2018,
+            "Country": "Italy",
+            "CircuitName": "Autodromo Nazionale di Monza",
+            "StartTime": "2018-09-02T13:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 15,
+            "RaceName": "Singapore Grand Prix",
+            "Season": 2018,
+            "Country": "Singapore",
+            "CircuitName": "Marina Bay Street Circuit",
+            "StartTime": "2018-09-16T12:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 16,
+            "RaceName": "Russian Grand Prix",
+            "Season": 2018,
+            "Country": "Russia",
+            "CircuitName": "Sochi Autodrom",
+            "StartTime": "2018-09-30T11:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 17,
+            "RaceName": "Japanese Grand Prix",
+            "Season": 2018,
+            "Country": "Japan",
+            "CircuitName": "Suzuka Circuit",
+            "StartTime": "2018-10-07T05:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 18,
+            "RaceName": "United States Grand Prix",
+            "Season": 2018,
+            "Country": "USA",
+            "CircuitName": "Circuit of the Americas",
+            "StartTime": "2018-10-21T18:10:00Z",
+            "IsHasLapData": true
+        },
+        {
+            "Round": 19,
+            "RaceName": "Mexican Grand Prix",
+            "Season": 2018,
+            "Country": "Mexico",
+            "CircuitName": "Autódromo Hermanos Rodríguez",
+            "StartTime": "2018-10-28T19:10:00Z",
+            "IsHasLapData": false
+        },
+        {
+            "Round": 20,
+            "RaceName": "Brazilian Grand Prix",
+            "Season": 2018,
+            "Country": "Brazil",
+            "CircuitName": "Autódromo José Carlos Pace",
+            "StartTime": "2018-11-11T17:10:00Z",
+            "IsHasLapData": false
+        },
+        {
+            "Round": 21,
+            "RaceName": "Abu Dhabi Grand Prix",
+            "Season": 2018,
+            "Country": "UAE",
+            "CircuitName": "Yas Marina Circuit",
+            "StartTime": "2018-11-25T13:10:00Z",
+            "IsHasLapData": false
+        }
+    ]
+}

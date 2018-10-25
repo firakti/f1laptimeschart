@@ -127,9 +127,9 @@ function createHorizontalChartSlider(containerDiv, containerSvg, chartConfigurat
             id: "",
             steps: steps,
             orientation: 'X',
-            min: domainX[0] + 1,
-            max: domainX[1] + 1,
-            width: (lapViewWidth * laps.length),
+            min: domainX[0] ,
+            max: domainX[1] ,
+            width: (lapViewWidth * (laps.length-1)),
             height: config.height,
             handle:
             {

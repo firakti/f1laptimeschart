@@ -43,7 +43,6 @@ class GpDataRepository {
             $.ajaxSetup({
                 async: true
             });
-            var t0 = performance.now();
             let best = gpData.AllLaps[0].time;
             let worst = gpData.AllLaps[0].time;
             var lapTimeMap = {};
@@ -61,8 +60,6 @@ class GpDataRepository {
                     worst = lap.time;
                 }
             }, this);
-            var t1 = performance.now();
-            console.log("Call to init took " + (t1 - t0) + " milliseconds.");
             let raceData = {
                 best: best,
                 worst: worst,

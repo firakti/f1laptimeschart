@@ -23,7 +23,7 @@ class ValueBrushHandle {
             .attr("height", this.config.height)
             .attr("class", "brush-value")
             .attr("text-anchor", "middle")
-            .attr("transform", (d, i) => { return "translate(" +(this.config.width/2) + "," + (this.config.height/2 + 5)  + ")"; })
+            .attr("transform", (d, i) => { return "translate(" + (this.config.width / 2) + "," + (this.config.height / 2 + 5) + ")"; })
 
             .text((d, i) => { return this.config.format(d + "-" + i) })
             ;
@@ -78,6 +78,7 @@ class Brush {
             steps: null,
             width: 100,
             height: 100,
+            minRange: 0,
             handle: {
                 type: TriagnleBrushHandle,
                 config: {
@@ -103,6 +104,7 @@ class Brush {
         this.gBrush.selectAll(".extent")
             .attr("height", this.config.height)
             .attr("width", this.config.width);
+        this.brush.extent([this.config.start, this.config.end])
 
         this.gBrush.call(this.brush.event);
 
@@ -121,7 +123,7 @@ class Brush {
                 .domain([this.config.min, this.config.max]);
             this.brush = d3.svg.brush()
                 .x(this.scale)
-                .extent([this.config.start, this.config.end])
+                .extent([this.config.min, this.config.max])
                 .on("brush", this._onBrushMove(this))
                 .on("brushend", this._onBrushEnd(this));
 
@@ -132,7 +134,7 @@ class Brush {
                 .domain([this.config.min, this.config.max]);
             this.brush = d3.svg.brush()
                 .y(this.scale)
-                .extent([this.config.start, this.config.end])
+                .extent([this.config.min, this.config.max])
                 .on("brush", this._onBrushMove(this))
                 .on("brushend", this._onBrushEnd(this));
         }

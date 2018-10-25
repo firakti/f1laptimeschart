@@ -1,22 +1,3 @@
-//function d3Base {
-//    attribtes = {
-//    };
-//    set(ob, property) {
-//        let setter = ob.attr.bind(ob);
-//        return function (value) {
-//            setter("stroke-width", value);
-//        }
-//    }
-//    getSetter() {
-//    }
-//    map(attributeName, setter) {
-//        atributeMap = {}
-//        atributes[attributeName] = d3.selectAll("rect").attr("asdfaf", function (this.));
-//    }
-//    update() {
-//    }
-//}
-
 function HeatMap(g, config, data) {
     let _this = this;
     this.scaleX;

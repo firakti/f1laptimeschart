@@ -18,7 +18,7 @@ class GpDataRepository {
         };
         this.getSeasonRaceList = function(season)
         {
-            let url = dataUrl + '/season-' + season + '.json';
+            let url = dataUrl + '/season/' + season + '.json';
             let seasonInfo = null;
             $.ajaxSetup({
                 async: false

@@ -36,7 +36,7 @@ function AppController(view, dataRepository) {
     this.comparisonData;
     this.LoadSeason = function (season, race) {
         race = race || 1;
-        let seasons = [2016, 2017, 2018];
+        let seasons = [2017, 2018];
         _this.seasonInfo = _this.dataRepository.getSeasonRaceList(season, raceIndex);
         _this.view.buildMenu(seasons, _this.seasonInfo);
 

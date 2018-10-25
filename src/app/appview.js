@@ -12,7 +12,22 @@ function View() {
     this.comparisonChartContainer = "#lapDetails";
 
     this.buildMenu = function (seasons, races) {
-        var menuId = "#gplist"
+        var menuId = "#gplist";
+        
+        $("#seasonlist").empty();
+        seasons.forEach(function (season) {
+            let id = "season_" + season;
+            $("#seasonlist").append(
+                '<li  id ="' + id + '" >' +
+                '<a id = "' + season + '" >' + season + ' Season </a>' +
+                '</li>'
+            )
+
+            $("#" + id).click(function () {
+                setSeason(season);
+            });
+        }, this);
+
         $(menuId).empty();
         races.RaceInfoList.forEach(function (gp) {
 
@@ -39,18 +54,7 @@ function View() {
         }, this);
 
 
-        seasons.forEach(function (season) {
-            let id = "season_" + season;
-            $("#seasonlist").append(
-                '<li  id ="' + id + '" >' +
-                '<a id = "' + season + '" >' + season + ' Season </a>' +
-                '</li>'
-            )
-
-            $("#" + id).click(function () {
-                setSeason(season);
-            });
-        }, this);
+  
 
         function setSeason(season) {
             appController.LoadSeason(season, raceIndex)

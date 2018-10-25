@@ -4,24 +4,15 @@ d3Modules.chartSliderEvent =
         name: "chartSliderEvent",
         config: "",
         create: function (divId, container, chartConfiguration, data, eventBus) {
-            //console.log("chartSliderEventModule - Create");
-            return createchartSliderEventModule(divId, container, chartConfiguration, data, eventBus);
+            return createChartSliderEventModule(divId, container, chartConfiguration, data, eventBus);
         }
     };
 
-function createchartSliderEventModule(containerDiv, containerSvg, chartConfiguration, data, eventBus) {
+function createChartSliderEventModule(containerDiv, containerSvg, chartConfiguration, data, eventBus) {
 
     var moduleConfiguration = chartConfiguration.modules.chartSliderEvent.config;
-
-    var events = chartConfiguration.modules.chartSliderEvent.events;
-    var eventconfig = chartConfiguration.modules.chartSliderEvent.eventconfig;
-
     var config = initConfig(containerDiv, chartConfiguration.config, moduleConfiguration);
-    var dataConfig = initConfig(containerDiv, chartConfiguration.dataConfig, moduleConfiguration);
-    config.width = config.width - 60;
-    var d3config = initD3Config(config, dataConfig, chartConfiguration.data);
-    var container = new Conatiner();
-
+    var container = new VisualizationModule();
     var colors = chartConfiguration.pilotMedia;
 
     var moduleContainer = containerSvg.append("g")

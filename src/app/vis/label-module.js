@@ -12,7 +12,7 @@ d3Modules.label =
 function createLabelModule(containerDiv, containerSvg, chartConfiguration, data, eventBus) {
 
     var config = initConfig(containerDiv, chartConfiguration.config, chartConfiguration.modules.label.config);
-    var container = new Conatiner();
+    var container = new VisualizationModule();
 
     var pilots = chartConfiguration.pilots;
     var colors = chartConfiguration.pilotMedia;

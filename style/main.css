@@ -12,6 +12,7 @@ body {
     margin: 0;
     min-height: 100%;
     width: 100%;
+    background-color: #EDEBE2;
 }
 
 .titles, h2, h3 {

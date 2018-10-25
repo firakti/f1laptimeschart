@@ -8,57 +8,6 @@ d3Modules.lineChart =
         }
     };
 
-function LineTooltip(svg, scaleX, scaleY, xKey, yKey) {
-
-    var data = []
-    var focus = svg.append("g");
-    svg.on("mousemove", mousemove)
-    bisectX = d3.bisector(function (d) { return d[xKey]; }).left;
-    focus.append("rect")
-        .attr("width", "100%")
-        .attr("height", 20)
-        .attr("opacity", 0.3)
-    var text = focus.append("g")
-        .attr("transform", "translate(10,15)")
-        .append("text")
-        .attr("class", "axis-text")
-        .attr("width", "100%")
-        .attr("height", 30)
-        .text("");
-
-    var toolTipText = function (d) {
-
-        var htmlString =
-            " Pilot :" + d['pilot'] + " " +
-            " Lap :" + d['lap'] + " " +
-            " Time :" + toFormatedTime(d['time']) + " " +
-            " Position :" + d['pilotPosition'] + " "
-        return htmlString;
-    }
-
-    this.show = function (d) {
-        focus.attr("opacity", 1)
-        data = d;
-    }
-
-    this.hide = function (d) {
-        focus.attr("opacity", 0)
-    }
-
-    function mousemove(d) {
-        var x0 = scaleX.invert(d3.mouse(this)[0]),
-            i = bisectX(data, x0, 1),
-            d0 = data[i - 1],
-            d1 = data[i],
-            d = x0 - d0[xKey] > d1[xKey] - x0 ? d1 : d0;
-        var tooltipText = toolTipText(d);
-        text.text(tooltipText);
-        //  text.text(JSON.stringify(d).replace(/_/g, " ").replace(/}/g, '\t').replace('{', ' ').replace(/"/g, ' ').replace(",", " "));
-    }
-    function getPositon(d) {
-
-    }
-}
 function createLineChartModule(containerDiv, containerSvg, chartConfiguration, data, eventBus) {
 
 
@@ -68,7 +17,7 @@ function createLineChartModule(containerDiv, containerSvg, chartConfiguration, d
     config.width = config.width - config.margin.left;
     config.height = config.height;
 
-    var container = new Conatiner();
+    var container = new VisualizationModule();
     let pilotStates = {};
     var colorMap = function (pilotName) {
         var value;
@@ -93,9 +42,8 @@ function createLineChartModule(containerDiv, containerSvg, chartConfiguration, d
         width: config.width,
         height: config.height,
         colorMap: colorMap,
-        mouseOver: mouseOver,
-        mouseOut: mouseOut,
         yAxisWidth: 50,
+        opacity:0.2,
         xAxisHeight: 40,
         x: d => d['lap'],
         y: d => d['time'],
@@ -112,40 +60,18 @@ function createLineChartModule(containerDiv, containerSvg, chartConfiguration, d
 
     let lineChart = new MultipleLineChart(moduleContainer, lineChartConfig, data)
 
-    function mouseOut(key, value) {
-
-        if (IsNull(key))
-            return false;
-
-    }
-
-    function mouseOver(key, value) {
-
-        if (IsNull(key))
-            return false;
-
-    }
-
-
-
     function HandleEvent(event) {
-        if (event.name == EventTypes.resize) {
-            // resize();
-        }
-
-        else if (event.name == EventTypes.hover) {
+        
+        if (event.name == EventTypes.hover) {
             hover(event.value.key);
         }
-
         else if (event.name == EventTypes.unhover) {
             unHover(event.value.key);
         }
 
         else if (event.name == EventTypes.click) {
-
             var pilot = event.value.key;
             var focus = event.value.focus;
-
             onClickHandler(pilot, focus);
         }
 
@@ -177,20 +103,14 @@ function createLineChartModule(containerDiv, containerSvg, chartConfiguration, d
 
         function hover(key, focus) {
 
-            let hoverRate = 0.5;
+            let hoverRate = 1;
 
-            if (typeof key == 'undefined')
+            if (typeof key === 'undefined')
                 return false;
-            if (typeof focus == 'undefined') {
+            if (typeof focus === 'undefined') {
                 if (typeof pilotStates[key.name] != 'undefined') {
                     focus = pilotStates[key.name];
                 }
-            }
-            if (focus == 1) {
-                hoverRate = 0.5;
-            }
-            if (focus == 2) {
-                hoverRate = 1;
             }
             lineChart.SetHover(key.name, hoverRate);
         }
@@ -220,16 +140,7 @@ function createLineChartModule(containerDiv, containerSvg, chartConfiguration, d
 
     }
 
-    function resize() {
-    }
-
-
     eventBus.subscribe(HandleEvent);
-
-
-    container.refresh = function (chartConfiguration) {
-
-    }
 
     return container;
 }

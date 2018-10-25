@@ -1,4 +1,5 @@
-﻿class d3Base {
+﻿// not used
+class d3Base {
     constructor(container, config, data) {
 
         this._defaultConfig;

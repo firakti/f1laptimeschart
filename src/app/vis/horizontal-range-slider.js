@@ -6,7 +6,6 @@ d3Modules.horizontalChartSlider =
         properties: [],
         defaultsProperties: [],
         create: function (divId, container, chartConfiguration, data, eventBus) {
-            //console.log("chartSliderEventModule - Create");
             return createHorizontalChartSlider(divId, container, chartConfiguration, data, eventBus);
         }
     };
@@ -41,8 +40,6 @@ function createHorizontalChartSlider(containerDiv, containerSvg, chartConfigurat
     var worst = chartConfiguration.modules.horizontalChartSlider.dataConfig.worst;
 
 
-    var defaultsPropertiest = [];
-
     var colorMap = ['#a50026', '#d73027', '#f46d43', '#fdae61', '#fee08b', '#d9ef8b', '#a6d96a', '#66bd63', '#1a9850', '#006837'];
     colorMap = colorMap.reverse();
 
@@ -57,11 +54,8 @@ function createHorizontalChartSlider(containerDiv, containerSvg, chartConfigurat
     var dataConfig = initConfig(containerDiv, chartConfiguration.dataConfig, moduleConfiguration);
     config.width = config.width - 60;
     config.height = config.height - 30
-    var d3config = initD3Config(config, dataConfig, chartConfiguration.data);
-
-    var container = new Conatiner();
+    var container = new VisualizationModule();
     var index = 0;
-    var labelHeight = 35;
     var labelWidth = 50;
     let seperation = 4;
     var lapViewWidth = Math.floor((config.width - labelWidth) / (max - min));

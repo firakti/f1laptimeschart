@@ -23,9 +23,8 @@ function MergeTo(obj1, obj2) {
     }
     return cloneObject;
 }
-function isEmptyObject(obj) {
-    return Object.getOwnPropertyNames(obj).length === 0;
-}
+
+
 var toFormatedTime = function (miliseconds) {
     var minute = Math.floor(miliseconds / (1000 * 60));
     var second = Math.floor((miliseconds - minute * (1000 * 60)) / 1000);
@@ -34,13 +33,13 @@ var toFormatedTime = function (miliseconds) {
 }
 
 function  IsNull(ob) {
-    if ("undefined" == typeof ob) {
+    if ("undefined" === typeof ob || ob===null) {
         return true;
     }
     return false;
 }
 
-function getWidth(container, w) {
+function getAbsoluteValue(container, w) {
     var item = d3.select(container);
     var width;
     if (typeof w != 'undefined') {

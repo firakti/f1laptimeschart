@@ -155,7 +155,7 @@ class MultipleLineChart {
             this.lines[key]
                 .attr("opacity", opacity)
                 .attr("stroke-width", strokewidth)
-                .moveToFront2();
+                .moveToFront();
         }
     }
 

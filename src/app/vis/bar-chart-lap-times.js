@@ -12,14 +12,10 @@ d3Modules.lapTimeBarChart =
 
 function createLapTimeBarChart(containerDiv, containerSvg, chartConfiguration, data, eventBus) {
 
-
     var config = initConfig(containerDiv, chartConfiguration.config, chartConfiguration.modules.lapTimeBarChart.config);
     var laps = chartConfiguration.modules.lapTimeBarChart.selectedLaps;
-
-
     var colors = chartConfiguration.pilotMedia;
-
-
+    
     var colorMap = function (pilotName) {
         var value;
         colors.forEach(function (element) {
@@ -29,7 +25,7 @@ function createLapTimeBarChart(containerDiv, containerSvg, chartConfiguration, d
         return value;
     }
 
-    var container = new Conatiner();
+    var container = new VisualizationModule();
 
     var fastColor = '#66F567';
     var slowColor = '#FFE953'

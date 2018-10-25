@@ -2,9 +2,9 @@
 function AppController(view, dataRepository) {
 
 
-    comparasionRanges = {};
+    comparisonRanges = {};
 
-    function ComparasionItem(name, start, end, id) {
+    function ComparisonItem(name, start, end, id) {
 
         this.id = id;
         this.name = name;
@@ -23,20 +23,17 @@ function AppController(view, dataRepository) {
 
     this.dataRepository = dataRepository;
 
-
     this.defaultMin = 1;
     this.defaultMax = 70;
     this.maxItemCount = 5;
-
     this.selectedPilots = [];
-
     this.lapData;
     this.pilots;
     this.pilotMedia;
     this.events;
     this.lapCount;
     this.sliderData;
-    this.comparationData;
+    this.comparisonData;
     this.LoadSeason = function (season, race) {
         race = race || 1;
         let seasons = [2016, 2017, 2018];
@@ -67,9 +64,9 @@ function AppController(view, dataRepository) {
         _this.bestTime = _this.raceData.best;
         _this.worstTime = _this.raceData.worst;
         _this.sliderData = [];
-        _this.comparationData = [];
+        _this.comparisonData = [];
 
-        _this.initVisualations();
+        _this.initVisualizations();
 
         if (stateManager.read("pilots")) {
             initState(stateManager.read("pilots"))
@@ -81,16 +78,16 @@ function AppController(view, dataRepository) {
         _this.selectedPilots = [];
 
         pilots.forEach(function (pilot) {
-            _this.addComparasionItem(pilot.name, pilot.start, pilot.end, pilot.id);
+            _this.addComparisonItem(pilot.name, pilot.start, pilot.end, pilot.id);
         }, this);
 
         _this.view.drawSliders(_this.selectedPilots, _this.bestTime, _this.worstTime);
-        _this.comparationData = _this.createComparasionData(_this.selectedPilots);
-        _this.view.drawComparasion(_this.comparationData);
+        _this.comparisonData = _this.createComparisonData(_this.selectedPilots);
+        _this.view.drawComparison(_this.comparisonData);
     }
 
-    this.initVisualations = function () {
-        _this.view.init(_this.lapData, _this.pilots, _this.pilotMedia, _this.events, _this.lapCount, _this.sliderData, _this.comparationData);
+    this.initVisualizations = function () {
+        _this.view.init(_this.lapData, _this.pilots, _this.pilotMedia, _this.events, _this.lapCount, _this.sliderData, _this.comparisonData);
         _this.view.onPilotSelectedEvent.subscribe(_this.AddSelectedPilot);
         _this.view.onPilotSliderChangeEvent.subscribe(_this.ChangeComprasionRange);
     }
@@ -100,15 +97,15 @@ function AppController(view, dataRepository) {
         _this.selectedPilots = [];
 
         pilots.forEach(function (pilot) {
-            _this.addComparasionItem(pilot.name, _this.defaultMin, _this.defaultMax, pilot.id);
+            _this.addComparisonItem(pilot.name, _this.defaultMin, _this.defaultMax, pilot.id);
         }, this);
 
 
         stateManager.write("pilots", getRange(_this.selectedPilots));
 
         _this.view.drawSliders(_this.selectedPilots, _this.bestTime, _this.worstTime);
-        _this.comparationData = _this.createComparasionData(_this.selectedPilots);
-        _this.view.drawComparasion(_this.comparationData);
+        _this.comparisonData = _this.createComparisonData(_this.selectedPilots);
+        _this.view.drawComparison(_this.comparisonData);
     }
     this.ChangeComprasionRange = function (range) {
 
@@ -120,7 +117,7 @@ function AppController(view, dataRepository) {
         var end = range.end;
         var id = range.sliderId;
 
-        comparasionRanges[id] = range;
+        comparisonRanges[id] = range;
 
         _this.selectedPilots.forEach(function (selectedPilot) {
             if (selectedPilot.id == id) {
@@ -131,8 +128,8 @@ function AppController(view, dataRepository) {
 
         stateManager.write("pilots", getRange(_this.selectedPilots));
 
-        _this.comparationData = _this.createComparasionData(_this.selectedPilots);
-        _this.view.drawComparasion(_this.comparationData);
+        _this.comparisonData = _this.createComparisonData(_this.selectedPilots);
+        _this.view.drawComparison(_this.comparisonData);
     }
 
     function getRange(pilots) {
@@ -145,14 +142,14 @@ function AppController(view, dataRepository) {
 
 
 
-    this.addComparasionItem = function (name, start, end, id) {
+    this.addComparisonItem = function (name, start, end, id) {
 
-        var item = new ComparasionItem(name, start, end, id);
+        var item = new ComparisonItem(name, start, end, id);
         item.laps = _this.raceData.lapTimeMap[item.name];
 
-        if (typeof comparasionRanges[id] != 'undefined') {
-            item.start = comparasionRanges[id].start;
-            item.end = comparasionRanges[id].end;
+        if (typeof comparisonRanges[id] != 'undefined') {
+            item.start = comparisonRanges[id].start;
+            item.end = comparisonRanges[id].end;
         }
 
         _this.selectedPilots.push(item);
@@ -160,10 +157,10 @@ function AppController(view, dataRepository) {
         return true;
     }
 
-    this.createComparasionData = function (selectedPilots) {
+    this.createComparisonData = function (selectedPilots) {
 
         var pilotData = [];
-        var comparationData = [];
+        var comparisonData = [];
         var bestTime = -1;
 
 
@@ -184,12 +181,12 @@ function AppController(view, dataRepository) {
 
 
         pilotData.forEach(function (element) {
-            var itemComparasionData = { 'laps': [], 'total': 0, 'name': "", 'totaldif': 0 };
+            var itemComparisonData = { 'laps': [], 'total': 0, 'name': "", 'totaldif': 0 };
             var total = 0;
             element.data.forEach(function (item) {
                 if (typeof item !== 'undefined') {
 
-                    itemComparasionData.laps.push({
+                    itemComparisonData.laps.push({
                         'name': element.pilot,
                         'time': item.time,
                         'lap': item.lap,
@@ -200,20 +197,20 @@ function AppController(view, dataRepository) {
                 }
             }, this);
 
-            itemComparasionData.total = total;
-            itemComparasionData.name = element.pilot;
+            itemComparisonData.total = total;
+            itemComparisonData.name = element.pilot;
 
-            comparationData.push(itemComparasionData);
+            comparisonData.push(itemComparisonData);
             if (bestTime == -1) {
-                bestTime = itemComparasionData;
+                bestTime = itemComparisonData;
             } else if (total < bestTime.total) {
-                bestTime = itemComparasionData;
+                bestTime = itemComparisonData;
             }
             var i = 0;
         }, this);
 
 
-        comparationData.forEach(function (item) {
+        comparisonData.forEach(function (item) {
             item.totaldif = item.total - bestTime.total;
 
             for (var index = 0; index < item.laps.length; index++) {
@@ -228,11 +225,11 @@ function AppController(view, dataRepository) {
 
         }, this);
 
-        comparationData.sort(function (a, b) {
+        comparisonData.sort(function (a, b) {
             return a.total - b.total;
         });
 
-        return comparationData;
+        return comparisonData;
     }
 }
 

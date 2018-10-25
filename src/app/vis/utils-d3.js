@@ -1,5 +1,40 @@
+function initConfig(container, parentConfig, moduleConfig) {
+    var config = MergeTo(parentConfig, moduleConfig);
+    config.width = getAbsoluteValue(container, config.width)
 
-var ddlog = []
+    if (!IsNull(config.margin)) {
+        var translateX = 0;
+        var translateY = 0;
+        var totalX = 0;
+        var totalY = 0;
+
+        if (!IsNull(config.margin.top)) {
+            translateY = config.margin.top;
+            totalY += config.margin.top;
+        }
+        if (!IsNull(config.margin.bottom)) {
+            totalY += config.margin.bottom;
+        }
+        if (!IsNull(config.margin.left)) {
+            translateX = config.margin.left;
+            totalX += config.margin.left;
+        }
+        if (!IsNull(config.margin.right)) {
+            totalX += config.margin.right;
+        }
+
+        if (typeof moduleConfig.width == 'undefined') {
+            if (!isNaN(parseFloat(parentConfig.width))) {
+                config.width = config.width - totalX;
+            }
+        }
+    }
+    config.transform = "translate(" + translateX + "," + translateY + ")";
+
+    return config;
+}
+
+
 function colorScale3(data, colors, colorWeights, valueF) {
 
     let valueFunction = valueF || (d => d);
@@ -67,6 +102,7 @@ function colorScale3(data, colors, colorWeights, valueF) {
         scale: scale
     };
 }
+
 function colorScale2(data, colors, valueFunction) {
     if (!valueFunction)
         valueFunction = function (d) {
@@ -103,45 +139,7 @@ function colorScale2(data, colors, valueFunction) {
     };
 }
 
-var data = [];
-for (var i = 0; i < 150; i++) {
-    data.push({
-        x: Math.sin(i / 45),
-        y: i
-    });
-}
-function ColorScale(data, colors, key) {
-
-    var getValue = function (d) {
-        return (typeof key != 'undefined') ? d[key] : d
-    };
-    var dataRange = d3.extent(data, getValue);
-    var scaleCount = (colors.length - 1);
-    var colorScaleRange = (dataRange[1] - dataRange[0]) / scaleCount;
-    var scales = [];
-
-    for (var i = 0; i < scaleCount; i++) {
-        var a = d3.scale.linear().range([colors[i], colors[i + 1]]).domain([i * colorScaleRange, (i + 1) * colorScaleRange])
-        scales.push(a);
-    }
-
-    var scale = function (d) {
-        var scaleIndex = Math.floor((getValue(d) - dataRange[0]) / colorScaleRange);
-        if (scaleIndex >= scales.length) {
-            scaleIndex = scales.length - 1;
-        }
-        var scalefunction = scales[scaleIndex];
-        console.log(scaleIndex);
-        return colors[scaleIndex];
-        return (scalefunction(getValue(d)));
-    }
-
-    return scale;
-}
-
-
-
-
+// this method will changed 
 function initDataConfig(dataConfig, data) {
     var ChartData;
     if (typeof dataConfig.groupkey != 'undefined') {
@@ -153,43 +151,39 @@ function initDataConfig(dataConfig, data) {
     return ChartData;
 }
 
-function initD3Config(config, dataConfig, data) {
-    var d3Config = {};
+// function initScales(data, x, y, width, height, timeFormat) {
 
-    var sample = data[0][dataConfig.x]
-    var extent = d3.extent(data, function (d) { return d[dataConfig.x] });
+//     if (x(data[0]) instanceof Date) {
+//         scaleX = d3.time.scale()
+//             .range([0, width])
+//             .domain(d3.extent(data, x));
+//     }
+//     else if (!IsNull(timeFormat)) {
+//         let parseTime = d3.time.format(timeFormat).parse;
+//         scaleX = d3.time.scale()
+//             .range([0, width])
+//             .domain(d3.extent(data, function (d) { return parseTime(x(d)) }));
+//     }
+//     else {
+//         scaleX = d3.scale.linear()
+//             .range([0, width])
+//             .domain(d3.extent(data, function (d) { return x(d) }));
+//     }
 
-    if (sample instanceof Date) {
-        d3Config.x = d3.time.scale()
-            .range([0, config.width])
-            .domain(d3.extent(data, function (d) { return d[dataConfig.x] }));
-    }
-    else if (!(IsNull(dataConfig.timeFormat)) && dataConfig.timeFormat != '') {
-        parseTime = d3.time.format(dataConfig.timeFormat).parse;
-        d3Config.x = d3.time.scale()
-            .range([0, config.width])
-            .domain(d3.extent(data, function (d) { return parseTime(d[dataConfig.x]) }));
-    }
-    else {
-        d3Config.x = d3.scale.linear()
-            .range([0, config.width])
-            .domain(d3.extent(data, function (d) { return d[dataConfig.x] }));
-    }
+//     scaleY = d3.scale.linear()
+//         .range([height, 0]);
 
-    d3Config.y = d3.scale.linear()
-        .range([config.height, 0]);
+//     if (typeof dataConfig.yMin != 'undefined' && dataConfig.yMax != 'undefined') {
+//         scaleY.domain([dataConfig.yMin, dataConfig.yMax]);
+//     }
+//     else {
+//         scaleY.domain(d3.extent(data, function (d) { return y(d); }));
+//     }
+//     d3Config.d = d3.svg.line()
+//         .x(function (d) {
+//             return scaleX((IsNull(dataConfig.timeFormat) || dataConfig.timeFormat == '') ? x(d) : parseTime(x(d)));
+//         })
+//         .y(function (d) { return scaleY(y(d)); });
 
-    if (typeof dataConfig.yMin != 'undefined' && dataConfig.yMax != 'undefined') {
-        d3Config.y.domain([dataConfig.yMin, dataConfig.yMax]);
-    }
-    else {
-        d3Config.y.domain(d3.extent(data, function (d) { return d[dataConfig.y]; }));
-    }
-    d3Config.d = d3.svg.line()
-        .x(function (d) {
-            return d3Config.x((IsNull(dataConfig.timeFormat) || dataConfig.timeFormat == '') ? d[dataConfig.x] : parseTime(d[dataConfig.x]));
-        })
-        .y(function (d) { return d3Config.y(d[dataConfig.y]); });
-
-    return d3Config;
-}
+//     return { scaleX: screenX, scaleY: scaleY };
+// }

@@ -3,13 +3,13 @@ function View() {
 
     this.lineChart;
     this.sliderChart;
-    this.comparasionChart;
+    this.comparisonChart;
     this.lineChartConfig;
     this.sliderConfig;
-    this.comparasionChartConfig;
+    this.comparisonChartConfig;
     this.lineChartContainer = '#chart';
     this.sliderContainer = '#lapSelection';
-    this.comparasionChartContainer = "#lapDetails";
+    this.comparisonChartContainer = "#lapDetails";
 
     this.buildMenu = function (seasons, races) {
         var menuId = "#gplist"
@@ -53,18 +53,18 @@ function View() {
         }, this);
 
         function setSeason(season) {
-            appContoller.LoadSeason(season, raceIndex)
+            appController.LoadSeason(season, raceIndex)
         }
 
         function initRace(season, raceIndex, raceName) {
             $('#raceTitle').text(season + " " + raceName);
             $('.nav-item').removeClass('active');
             $('#' + raceIndex).addClass('active');
-            appContoller.LoadRace(season, raceIndex)
+            appController.LoadRace(season, raceIndex)
         }
     }
 
-    this.init = function (lapData, pilots, pilotMedia, events, lapCount, sliderData, comparationData) {
+    this.init = function (lapData, pilots, pilotMedia, events, lapCount, sliderData, comparisonData) {
 
 
         _this.lineChartConfig = {
@@ -168,7 +168,7 @@ function View() {
             }
         };
 
-        comparasionChartConfig = {
+        comparisonChartConfig = {
 
             pilots: pilots,
             pilotMedia: pilotMedia,
@@ -183,7 +183,7 @@ function View() {
                         height: 100,
                         hover: true,
                     },
-                    selectedLaps: comparationData,
+                    selectedLaps: comparisonData,
                 }
             },
             config:
@@ -196,15 +196,15 @@ function View() {
         };
         _this.lineChart = Create(_this.lineChartContainer, _this.lineChartConfig);
         _this.sliderChart = Create(_this.sliderContainer, _this.sliderConfig);
-        _this.comparasionChart = Create(_this.comparasionChartContainer, comparasionChartConfig);
+        _this.comparisonChart = Create(_this.comparisonChartContainer, comparisonChartConfig);
 
         _this.lineChart.eventBus.subscribe(_this.HandleEvents)
         _this.sliderChart.eventBus.subscribe(_this.HandleEvents)
-        _this.comparasionChart.eventBus.subscribe(_this.HandleEvents)
+        _this.comparisonChart.eventBus.subscribe(_this.HandleEvents)
 
     };
 
-    this.drawVisualations = function () {
+    this.drawvisualizations = function () {
 
     }
 
@@ -223,12 +223,12 @@ function View() {
         _this.sliderConfig.modules.horizontalChartSlider.data = sliderData;
         _this.sliderChart.refresh(_this.sliderConfig);
     }
-    this.drawComparasion = function (comparasionData) {
-        if (typeof comparasionData.length != 'undefined')
-            comparasionChartConfig.config.height = comparasionData.length * 100;
+    this.drawComparison = function (comparisonData) {
+        if (typeof comparisonData.length != 'undefined')
+            comparisonChartConfig.config.height = comparisonData.length * 100;
 
-        comparasionChartConfig.modules.lapTimeBarChart.selectedLaps = comparasionData;
-        _this.comparasionChart.refresh(comparasionChartConfig);
+        comparisonChartConfig.modules.lapTimeBarChart.selectedLaps = comparisonData;
+        _this.comparisonChart.refresh(comparisonChartConfig);
     }
 
     this.HandleEvents = function (event) {

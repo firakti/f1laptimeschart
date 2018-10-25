@@ -26,7 +26,7 @@ function StateManager() {
 }
 var view = new View();
 var dataRepository = new GpDataRepository();
-var appContoller = new AppController(view, dataRepository);
+var appController = new AppController(view, dataRepository);
 var stateManager = new StateManager();
 var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
@@ -42,7 +42,7 @@ else {
     raceIndex = 1;
 }
 
-appContoller.LoadSeason(season,raceIndex);
+appController.LoadSeason(season,raceIndex);
 
 
 

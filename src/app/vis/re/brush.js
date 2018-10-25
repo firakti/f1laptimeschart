@@ -33,7 +33,7 @@ class ValueBrushHandle {
     }
 
 }
-class TriagnleBrushHandle {
+class TriangleBrushHandle {
     constructor(g, config) {
 
         if (config.orientation == 'X' || config.orientation == 'x') {
@@ -80,7 +80,7 @@ class Brush {
             height: 100,
             minRange: 0,
             handle: {
-                type: TriagnleBrushHandle,
+                type: TriangleBrushHandle,
                 config: {
                     orientation: 'X'
                 }

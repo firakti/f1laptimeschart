@@ -1,11 +1,9 @@
-
-d3Modules.verticalChartSlider =
-    {
-        name: 'verticalChartSlider',
-        create: function (divId, container, chartConfiguration, data, eventBus) {
-            return createVerticalChartSlider(divId, container, chartConfiguration, data, eventBus);
-        }
-    };
+d3Modules.verticalChartSlider = {
+    name: 'verticalChartSlider',
+    create: function (divId, container, chartConfiguration, data, eventBus) {
+        return createVerticalChartSlider(divId, container, chartConfiguration, data, eventBus);
+    }
+};
 
 function createVerticalChartSlider(containerDiv, containerSvg, chartConfiguration, data, eventBus) {
 
@@ -13,7 +11,7 @@ function createVerticalChartSlider(containerDiv, containerSvg, chartConfiguratio
     var moduleConfiguration = chartConfiguration.modules.verticalChartSlider.config;
     var config = initConfig(containerDiv, chartConfiguration.config, moduleConfiguration);
 
-    var container = new Conatiner();
+    var container = new VisualizationModule();
 
     var moduleContainer = containerSvg.append("g")
         .attr("height", config.height)
@@ -28,11 +26,10 @@ function createVerticalChartSlider(containerDiv, containerSvg, chartConfiguratio
         max: domainY[1],
         width: config.width,
         height: config.height,
-        handle:
-        {
+        handle: {
             type: ValueBrushHandle,
-            config:
-            {
+            config: {
+                format: toFormatedTime,
                 width: config.width,
                 height: 20,
             }
@@ -46,13 +43,15 @@ function createVerticalChartSlider(containerDiv, containerSvg, chartConfiguratio
 
         let event = new Event();
         event.name = EventTypes.verticalzoom;
-        event.value = { min: min, max: max };
+        event.value = {
+            min: min,
+            max: max
+        };
         event.source = "chartSlider";
         eventBus.notify(event);
 
     }
 
-    container.refresh = function (chartConfiguration) { }
+    container.refresh = function (chartConfiguration) {}
     return container;
 }
-

@@ -1,7 +1,6 @@
 {
     "Season": 2018,
-    "RaceInfoList": [
-        {
+    "RaceInfoList": [{
             "Round": 1,
             "RaceName": "Australian Grand Prix",
             "Season": 2018,
@@ -170,7 +169,7 @@
             "Country": "Mexico",
             "CircuitName": "Autódromo Hermanos Rodríguez",
             "StartTime": "2018-10-28T19:10:00Z",
-            "IsHasLapData": false
+            "IsHasLapData": true
         },
         {
             "Round": 20,
